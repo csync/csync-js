@@ -1,0 +1,17 @@
+# OSX
+.DS_Store
+
+# npm dependencies
+node_modules
+
+# node dev log
+npm-debug.log
+
+# generated docs
+docs/
+
+# coverage reports
+coverage/
+
+# Xcode
+xcuserdata
