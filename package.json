@@ -27,7 +27,7 @@
     "lodash": "^4.16.4",
     "node-uuid": "^1.4.7",
     "when": "^3.7.7",
-    "ws": "^1.1.1"
+    "ws": "0.7.2"
   },
   "devDependencies": {
     "babelify": "^7.3.0",
