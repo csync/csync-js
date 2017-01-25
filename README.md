@@ -70,7 +70,7 @@ Add csync to your `package.json` file:
 
 ```json
 "dependencies": {
-    "csync": "~1.0.0"
+    "csync": "~1.0.1"
 }
 ```
 
