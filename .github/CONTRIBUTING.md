@@ -36,7 +36,7 @@ yourself.
 5. When you have completed making all your changes, create a Pull Request (PR) from your git manager
 or our Github repo from your branch to master.
 6. Fill in the template for the PR.
-7. Contributions require sign-off. If you can certify the [Developer's Certificate of Origin 1.1 (DCO)](http://elinux.org/Developer_Certificate_Of_Origin) then you just add a Signed-off-by line to the PR description, which indicates that the you accept the DCO: `Signed-off-by: Jane Doe <jane.doe@domain.com>`
+7. Contributions require sign-off. We require that any contributers agree to the [Developer's Certificate of Origin 1.1 (DCO)](http://elinux.org/Developer_Certificate_Of_Origin), otherwise your pull request will be rejected.
     1. When committing using the command line you can sign off using the --signoff or -s flag. This adds a Signed-off-by line by the committer at the end of the commit log message.`git commit -s -m "Commit message"`
 8. That's it, thanks for the contribution!
 
