@@ -28,16 +28,14 @@ Use `grunt jsdoc` to build the docs.
 yourself.
     1. We use Zenhub to organize our issues and plan our releases. Giving as much information as to
     what your changes are help us organize PRs and streamline the committing process.
-3. Make a branch from the develop branch using the following naming convention:
+3. Make a branch from the master branch using the following naming convention:
     1. `YOUR_INITIALS/ISSUE#-DESCRIPTIVE-NAME`
     2. For example, `kb/94-create-contributingmd` was the branch that had the commit containing this
     tutorial.
 4. Commit your changes!
 5. When you have completed making all your changes, create a Pull Request (PR) from your git manager
-or our Github repo.
-6. In the comment for the PR write `Resolves #___` and fill the blank with the issue number you
-created earlier.
-    1. For example, the comment we wrote for the PR with this tutorial was `Resolves #94`
+or our Github repo from your branch to master.
+6. Fill in the template for the PR.
 7. That's it, thanks for the contribution!
 
 ## Setting up your environment
