@@ -129,3 +129,6 @@ Note: The ACL is inherited from its closest existing ancestor, up to the root ke
 # License
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](LICENSE).
+
+# Contribution Guide
+Want to contribute? Take a look at our [CONTRIBUTING.md](.github/CONTRIBUTING.md)
