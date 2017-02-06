@@ -1,7 +1,11 @@
-
-[![Build Status - Master](https://travis-ci.org/csync/csync-js.svg?branch=master)](https://travis-ci.org/csync/csync-js)
-
 # Contextual Sync
+
+[![Build Status - Master](https://travis-ci.org/csync/csync-server.svg?branch=master)](https://travis-ci.org/csync/csync-js)
+[![License][license-svg]][license-link]
+
+[license-svg]: https://img.shields.io/hexpm/l/plug.svg
+[license-link]: https://github.com/csync/csync-js/blob/master/LICENSE
+
 Contextual Sync (CSync) is an open source, real-time, continuous data synchronization service for building modern applications. The CSync data store is organized with key/values where keys have a hierarchical structure. Clients can obtain the current value for a key and any subsequent updates by listening on the key. Updates are delivered to all online clients in near-real time. Clients can also listen on a key pattern where some components contain wildcards.
 
 ## Keys
@@ -35,7 +39,7 @@ An Asterisk (`*`) wildcard will match any value in the part of the key where the
 #### Hash Wildcard
 If a developer wishes to listen to all child nodes in a subset of the tree, the `#` can appended to the end of a key and the client will sync with all child nodes of the specified key. For instance in the above tree if a user listens to `companies.ibm.#`, then the client will sync with all child nodes of `companies.ibm` which include `companies.ibm.stock` and `companies.ibm.offices`.
 
-**Note:** Each listen is independent. For example, if a developer listens to both `companies.*.stock` and `companies.companyX.stock`, the data from `companies.companyX.stock` will be received by both of the listeners. 
+**Note:** Each listen is independent. For example, if a developer listens to both `companies.*.stock` and `companies.companyX.stock`, the data from `companies.companyX.stock` will be received by both of the listeners.
 
 ## Guaranteed Relevance
 Only the latest, most recent, values sync, so you’re never left with old data. CSync provides a consistent view of the values for keys in the CSync store. If no updates are made to a key for a long enough period of time, all subscribers to the key will see the same consistent value. CSync guarantees that the latest update will be reflected at all connected, subscribed clients, but not that all updates to a key will be delivered. Clients will not receive an older value than what they have already received for a given key.
@@ -95,7 +99,7 @@ Applications use the CSync class to create a connection to a specific CSync serv
     var csync = require('csync');
 
     var app = csync({host: "localhost", port: 6005});
-    
+
 Note: Update the `host` and `port` to your specific csync server instance.
 
 ## Listening to values on a key
@@ -113,7 +117,7 @@ Note: Update the `host` and `port` to your specific csync server instance.
 
     var value = JSON.stringify({this: someValue, that: anotherValue});
     myKey.write(value);
-    
+
 Note: The ACL is inherited from its closest existing ancestor, up to the root key which has ACL `PublicCreate`.
 
 ## Writing a value to a CSync store with a given ACL
@@ -127,8 +131,8 @@ Note: The ACL is inherited from its closest existing ancestor, up to the root ke
 ## Deleting a key
 
     myKey.delete();
-    
-    
+
+
 # License
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](LICENSE).
