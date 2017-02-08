@@ -98,9 +98,23 @@ Applications use the CSync class to create a connection to a specific CSync serv
 
     var csync = require('csync');
 
-    var app = csync({host: "localhost", port: 6005});
+    var app = csync({host: "localhost", port: 6005, useSSL: false});
 
 Note: Update the `host` and `port` to your specific csync server instance.
+
+## Authenticating
+
+    app.authenticate("demo", "demoToken").then(function(authData){
+        /*Auth Data contains:
+        uid:  a unique user id across all providers, 
+        token: "demoToken" in this example,
+        provider: "demo" in this example,
+        expires: seconds since epoch as an int */
+    }, function(error){
+        //Authentication failed error information
+    });
+    
+Note: We are logging in as the [Demo User](https://github.com/csync/csync-js#demo-login)
 
 ## Listening to values on a key
 
@@ -122,7 +136,7 @@ Note: The ACL is inherited from its closest existing ancestor, up to the root ke
 
 ## Writing a value to a CSync store with a given ACL
 
-    myKey.write(value,{acl: newAcl});
+    myKey.write(value,{acl: csync.acl.PublicReadCreate});
 
 ## Unlistening
 
