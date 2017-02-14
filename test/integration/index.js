@@ -515,7 +515,7 @@ describe('Integration Tests', function() {
 
         it('should not be able to write on a wildcard', function(done) {
 
-            var app = csync({host: "localhost", port: 6005, useSSL: false});
+            var app = csync(config);
             app.authenticate(provider, token).then(function(authData){
                 var writeKey = app.key(jsKey+".delete-asterisk-test."+uuid.v4()+".*");
                 var value = "testData";
