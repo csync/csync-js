@@ -455,6 +455,24 @@ describe('Integration Tests', function() {
             });
         });
 
+        it('should be able to delete on a wildcard', function(done) {
+
+            var app = csync(config);
+            app.authenticate(provider, token);
+            var uuidString = uuid.v4();
+            var testKey = app.key(jsKey+".delete-asterisk-test."+uuidString+".a");
+            var deleteKey = app.key(jsKey+".delete-asterisk-test."+uuidString+".*");
+            var value = "testData";
+            testKey.write(value).then(function(result){
+                testKey.listen(function(error, value) {
+                    if(value.exists === false && error === null){
+                        done();
+                    }
+                });
+                deleteKey.delete();
+            });
+        });
+
     });
 
     // MARK: - Error cases
@@ -492,6 +510,19 @@ describe('Integration Tests', function() {
             }).catch(function(error) {
                 expect(error.code).to.be.equal(csync.RequestError);
                 done();
+            });
+        });
+
+        it('should not be able to write on a wildcard', function(done) {
+
+            var app = csync({host: "localhost", port: 6005, useSSL: false});
+            app.authenticate(provider, token).then(function(authData){
+                var writeKey = app.key(jsKey+".delete-asterisk-test."+uuid.v4()+".*");
+                var value = "testData";
+                writeKey.write(value).catch(function(error){
+                    expect(error.code).to.be.equal(csync.RequestError);
+                    done();
+                });
             });
         });
 
