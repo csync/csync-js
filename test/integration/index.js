@@ -42,7 +42,7 @@ describe('Integration Tests', function() {
         }
     }
 
-    this.timeout(10000);
+    this.timeout(20000);
 
     // MARK: - App tests
 
