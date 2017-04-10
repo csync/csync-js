@@ -16,6 +16,7 @@
 'use strict';
 
 var expect = require('chai').expect;
+var assert = require('chai').assert;
 
 var uuid = require('node-uuid');
 var when = require('when');
@@ -265,6 +266,46 @@ describe('Integration Tests', function() {
                     // Clean up
                     cleanUp(testKey, [testKey]);
                     done();
+                }
+            };
+
+            testKey.listen(listener);
+
+            setTimeout(function() {
+                var msg1 = {data: "data"};
+                testKey.write(msg1);
+            }, 1000);
+
+        });
+
+        it('should properly not return deleted values from db on listen', function(done) {
+            this.timeout(10000);
+
+            var app = csync(config);
+            app.authenticate(provider, token);
+
+            var testKey = app.key(jsKey+".shouldnotreturndeletesfromdb."+uuid.v4());
+
+            var count = 0;
+            var vts = 0;
+            var listener = function(error, value) {
+                count += 1;
+                if (count === 1) {
+                    console.log("got first");
+                    testKey.delete();
+                }
+                else if (count === 2) {
+                    console.log("got 2nd");
+                    testKey.unlisten();
+                    setTimeout(function() {
+                        testKey.listen(listener);
+                    }, 1000);
+                    setTimeout(function() {
+                        done();
+                    }, 5000);
+                } else {
+                    console.log("got 3rd");
+                    assert.fail();
                 }
             };
 
