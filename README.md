@@ -87,7 +87,7 @@ Add csync to your `package.json` file:
 
 ```json
 "dependencies": {
-    "csync": "~1.0.1"
+    "csync": "~1.3.0"
 }
 ```
 
