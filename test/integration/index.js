@@ -291,11 +291,9 @@ describe('Integration Tests', function() {
             var listener = function(error, value) {
                 count += 1;
                 if (count === 1) {
-                    console.log("got first");
                     testKey.delete();
                 }
                 else if (count === 2) {
-                    console.log("got 2nd");
                     testKey.unlisten();
                     setTimeout(function() {
                         testKey.listen(listener);
@@ -304,7 +302,6 @@ describe('Integration Tests', function() {
                         done();
                     }, 5000);
                 } else {
-                    console.log("got 3rd");
                     assert.fail();
                 }
             };
