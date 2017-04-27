@@ -131,12 +131,16 @@ Note: We are logging in as the [Demo User](https://github.com/csync/csync-js#dem
 ## Writing a value to a CSync store
 
     var value = JSON.stringify({this: someValue, that: anotherValue});
-    myKey.write(value);
+    myKey.write(msg).then(function(result) {
+        console.log("got write result: "+result);
+    }).catch(function(error) {
+        console.log("got error result: "+error);
+    });
 
 Note: The ACL is inherited from its closest existing ancestor, up to the root key which has ACL `PublicCreate`.
 
 ## Writing a value to a CSync store with a given ACL
-
+    
     myKey.write(value,{acl: csync.acl.PublicReadCreate});
 
 ## Unlistening
