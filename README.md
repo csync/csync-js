@@ -83,12 +83,8 @@ The ACL for a key is set when the key is created by the first write performed to
 
 ## Installing CSync using NPM
 
-Add csync to your `package.json` file:
-
-```json
-"dependencies": {
-    "csync": "~1.3.0"
-}
+```
+$ npm install csync --save
 ```
 
 # Usage
