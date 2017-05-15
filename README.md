@@ -83,12 +83,8 @@ The ACL for a key is set when the key is created by the first write performed to
 
 ## Installing CSync using NPM
 
-Add csync to your `package.json` file:
-
-```json
-"dependencies": {
-    "csync": "~1.3.0"
-}
+```
+$ npm install csync --save
 ```
 
 # Usage
@@ -97,59 +93,73 @@ Add csync to your `package.json` file:
 
 Applications use the CSync class to create a connection to a specific CSync service.
 
-    var csync = require('csync');
+```javascript
+var csync = require('csync');
 
-    var app = csync({host: "localhost", port: 6005, useSSL: false});
+var app = csync({host: "localhost", port: 6005, useSSL: false});
+```
 
 Note: Update the `host` and `port` to your specific csync server instance.
 
 ## Authenticating
 
-    app.authenticate("demo", "demoToken").then(function(authData){
-        /*Auth Data contains:
-        uid:  a unique user id across all providers, 
-        token: "demoToken" in this example,
-        provider: "demo" in this example,
-        expires: seconds since epoch as an int */
-    }, function(error){
-        //Authentication failed error information
-    });
+```javascript
+app.authenticate("demo", "demoToken").then(function(authData){
+    /*Auth Data contains:
+    uid:  a unique user id across all providers, 
+    token: "demoToken" in this example,
+    provider: "demo" in this example,
+    expires: seconds since epoch as an int */
+}, function(error){
+    //Authentication failed error information
+});
+```
     
 Note: We are logging in as the [Demo User](https://github.com/csync/csync-js#demo-login)
 
 ## Listening to values on a key
 
-    var myKey = app.key("a.b.c.d.e")
-    myKey.listen(function(error, value) {
-        if (error) {
-            // handle error
-        } else {
-            // value has key, data, acl, exists
-        }
+```javascript
+var myKey = app.key("a.b.c.d.e")
+myKey.listen(function(error, value) {
+	if (error) {
+		// handle error
+	} else {
+        // value has key, data, acl, exists
     }
+ }
+ ```
 
 ## Writing a value to a CSync store
 
-    var value = JSON.stringify({this: someValue, that: anotherValue});
-    myKey.write(msg).then(function(result) {
-        console.log("got write result: "+result);
-    }).catch(function(error) {
-        console.log("got error result: "+error);
-    });
+```javascript
+var value = JSON.stringify({this: someValue, that: anotherValue});
+myKey.write(msg).then(function(result) {
+	console.log("got write result: "+result);
+}).catch(function(error) {
+	console.log("got error result: "+error);
+});
+```
 
 Note: The ACL is inherited from its closest existing ancestor, up to the root key which has ACL `PublicCreate`.
 
 ## Writing a value to a CSync store with a given ACL
-    
-    myKey.write(value,{acl: csync.acl.PublicReadCreate});
+
+```javascript    
+myKey.write(value,{acl: csync.acl.PublicReadCreate});
+```
 
 ## Unlistening
 
-    myKey.unlisten();
+```javascript
+myKey.unlisten();
+```
 
 ## Deleting a key
 
-    myKey.delete();
+```javascript
+myKey.delete();
+````
     
 Note: A delete key can contain any number of wildcards as well. For example, the key a.b would be deleted by `a.*`, but the key `a.b.c` would not because the wildcard only covers the second part of the key. The key `a.b.c` could be deleted by `a.*.*`, `a.b.*`, `a.*.c`, `*.*.c` or `*.*.*`. The key `*.*.*` would delete all keys of length 3. Wildcard deletes make a best effort to delete everything you have access to. If you do not delete anything, you will still get a successful return because the server succesfully deleted all nodes you had access to, even if none existed.
 
